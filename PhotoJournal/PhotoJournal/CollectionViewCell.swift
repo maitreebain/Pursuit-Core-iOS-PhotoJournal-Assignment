@@ -28,6 +28,7 @@ class CollectionViewCell: UICollectionViewCell {
             return
         }
         photoItem.image = image
+        
     }
     
     

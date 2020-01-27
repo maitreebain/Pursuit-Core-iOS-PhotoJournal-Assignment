@@ -16,13 +16,22 @@ class PhotoJournalEntriesVC: UIViewController{
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
+    private let imagePickerController = UIImagePickerController()
+    
     public var imageData = [ImageData]()
+    
+    private var selectedImage: UIImage? {
+        didSet {
+            appendToImages()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        imagePickerController.delegate = self
         
         loadData()
     }
@@ -34,6 +43,37 @@ class PhotoJournalEntriesVC: UIViewController{
             print("image data cannot be loaded")
         }
     }
+    
+    private func appendToImages() {
+        
+        guard let image = selectedImage else {
+            print("image is nil")
+            return
+        }
+        let size = UIScreen.main.bounds.size
+        
+        let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: CGPoint.zero, size: size))
+        let resizeImage = image.resizeImage(to: rect.size.width, height: rect.size.height)
+        
+        print("resized: \(resizeImage.size)")
+        
+        guard let resizedImageData = resizeImage.jpegData(compressionQuality: 1.0) else {
+            return
+        }
+        
+        let imageInfo = ImageData(imageData: resizedImageData, date: Date())
+        
+        imageData.insert(imageInfo, at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        collectionView.insertItems(at: [indexPath])
+        
+        do{
+            try dataPersistence.create(item: imageInfo)
+        } catch {
+            print("could not save image")
+        }
+    }
+    
     
     
 }
@@ -80,6 +120,9 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//        let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self ] (alertAction) in
+//
+//        }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
             self?.deleteImage(indexPath: indexPath)
         }
@@ -88,6 +131,7 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
+        
         
     }
     
@@ -104,6 +148,21 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
     }
     
+}
+
+extension PhotoJournalEntriesVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            print("image selection not found")
+            return
+        }
+        selectedImage = image
+        dismiss(animated: true)
+    }
 }
 
 extension UIImage {

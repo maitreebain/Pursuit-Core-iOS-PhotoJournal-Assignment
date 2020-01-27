@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class PhotoEntryViewController: UIViewController {
 
@@ -25,18 +24,18 @@ class PhotoEntryViewController: UIViewController {
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
-    private var selectedImage: UIImage? {
-        didSet{
-            
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePickerController.delegate = self
     }
-
+    
+    private func noCamera() {
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            camButton.isEnabled = false
+        }
+    }
+    
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true)
@@ -49,11 +48,19 @@ class PhotoEntryViewController: UIViewController {
             return
         }
         
+        
     }
     
     
     @IBAction func photoLibraryButtonPressed(_ sender: UIBarButtonItem) {
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true)
         
+    }
+    
+    @IBAction func cameraButtonPressed(_ sender: UIBarButtonItem) {
+        imagePickerController.sourceType = .camera
+        present(imagePickerController, animated: true)
     }
     
 }
@@ -65,7 +72,7 @@ extension PhotoEntryViewController: UIImagePickerControllerDelegate, UINavigatio
             print("image selection not found")
             return
         }
-        selectedImage = image
+        imageView.image = image
         dismiss(animated: true)
     }
 }

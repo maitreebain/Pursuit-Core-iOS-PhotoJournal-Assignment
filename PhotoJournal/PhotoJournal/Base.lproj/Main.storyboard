@@ -156,7 +156,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="O3m-fC-omf"/>
-                                    <barButtonItem image="camera.circle.fill" catalog="system" id="Lbr-mh-LY8"/>
+                                    <barButtonItem image="camera.circle.fill" catalog="system" id="Lbr-mh-LY8">
+                                        <connections>
+                                            <action selector="cameraButtonPressed:" destination="wY7-OD-ogA" id="9AS-I9-bfm"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter description below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tm-wW-oJY">

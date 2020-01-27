@@ -91,14 +91,26 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//                let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self ] (alertAction) in
-//                }
+                let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] (alertAction) in
+                    
+                    guard let photoEditVC = self?.storyboard?.instantiateViewController(identifier: "PhotoEntryViewController") as? PhotoEntryViewController else {
+                        fatalError("did not instantiate view controller")
+                    }
+                    let selectedCell = self?.imageData[indexPath.row]
+                    
+                    photoEditVC.imageData = selectedCell
+                    self?.present(photoEditVC, animated: true)
+                }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
             self?.deleteImage(indexPath: indexPath)
         }
+//        let sharedAction = UIAlertAction(title: "Shared", style: .default) { [weak self] (alertAction) in
+//            <#code#>
+//        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
+        alertController.addAction(editAction)
         
         present(alertController, animated: true)
     }

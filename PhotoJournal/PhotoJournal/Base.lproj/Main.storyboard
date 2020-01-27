@@ -122,7 +122,7 @@
         <!--Photo Entry View Controller-->
         <scene sceneID="quy-0S-pJj">
             <objects>
-                <viewController id="wY7-OD-ogA" customClass="PhotoEntryViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoEntryViewController" id="wY7-OD-ogA" customClass="PhotoEntryViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Cn-HE-fJ8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

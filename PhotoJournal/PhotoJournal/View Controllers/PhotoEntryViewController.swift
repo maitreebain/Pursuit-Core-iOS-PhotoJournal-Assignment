@@ -37,6 +37,19 @@ class PhotoEntryViewController: UIViewController {
         imagePickerController.delegate = self
         textView.delegate = self
         saveButton.isEnabled = false
+        updateUI()
+    }
+    
+    private func updateUI() {
+        
+        guard let imageInfo = imageData else {
+            return
+        }
+        
+        imageView.image = UIImage(data: imageInfo.imageData)
+        
+        textView.text = imageInfo.description
+        
     }
     
     private func noCamera() {
@@ -84,7 +97,9 @@ class PhotoEntryViewController: UIViewController {
 
 extension PhotoEntryViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Description"{
         textView.text = ""
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

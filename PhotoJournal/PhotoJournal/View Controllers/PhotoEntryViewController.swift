@@ -37,6 +37,7 @@ class PhotoEntryViewController: UIViewController {
         super.viewDidLoad()
         
         imagePickerController.delegate = self
+        textView.delegate = self
     }
     
     private func noCamera() {
@@ -72,6 +73,7 @@ class PhotoEntryViewController: UIViewController {
         }
         
         delegate?.newDataAdded(self, resizedImage!, textView.text)
+        dismiss(animated: true)
     }
     
     
@@ -86,6 +88,16 @@ class PhotoEntryViewController: UIViewController {
         present(imagePickerController, animated: true)
     }
     
+}
+
+extension PhotoEntryViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.resignFirstResponder()
+    }
 }
 
 extension PhotoEntryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate

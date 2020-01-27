@@ -59,7 +59,7 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
 
 extension PhotoJournalEntriesVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemSpacing: CGFloat = 1
+        let itemSpacing: CGFloat = 10
         let maxWidth = UIScreen.main.bounds.size.width
         let numberOfItems: CGFloat = 1
         let totalSpace: CGFloat = numberOfItems * itemSpacing

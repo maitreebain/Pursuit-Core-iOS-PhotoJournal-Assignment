@@ -29,6 +29,8 @@ class PhotoJournalEntriesVC: UIViewController{
         loadData()
     }
     
+    
+    
     private func loadData() {
         do {
             imageData = try dataPersistence.loadImage()
@@ -37,7 +39,13 @@ class PhotoJournalEntriesVC: UIViewController{
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let photoEntryVC = segue.destination as? PhotoEntryViewController else {
+            fatalError("cannot segue")
+        }
+        photoEntryVC.delegate = self
+        
+    }
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDataSource {
@@ -83,9 +91,8 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        //        let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self ] (alertAction) in
-        //
-        //        }
+//                let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self ] (alertAction) in
+//                }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
             self?.deleteImage(indexPath: indexPath)
         }
@@ -94,8 +101,6 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
-        
-        
     }
     
     private func deleteImage(indexPath: IndexPath) {
@@ -121,4 +126,20 @@ extension UIImage {
             self.draw(in: CGRect(origin: .zero, size: size))
         }
     }
+}
+
+extension PhotoJournalEntriesVC: imageAppended{
+    func newDataAdded(_ viewController: PhotoEntryViewController, _ createdItem: ImageItem) {
+        imageData.append(createdItem)
+        
+        do {
+            try dataPersistence.create(item: createdItem)
+        } catch {
+            print("could not save info")
+        }
+        
+        
+    }
+    
+    
 }

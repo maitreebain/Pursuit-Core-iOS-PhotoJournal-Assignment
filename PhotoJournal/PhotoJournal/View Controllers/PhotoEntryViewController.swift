@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 protocol imageAppended: AnyObject {
-    func newDataAdded(_ viewController: PhotoEntryViewController, _ image: UIImage, _ description: String)
+    func newDataAdded(_ viewController: PhotoEntryViewController, _ createdItem: ImageItem)
 }
 
 class PhotoEntryViewController: UIViewController {
@@ -30,8 +30,6 @@ class PhotoEntryViewController: UIViewController {
     public var imageData: ImageItem?
     
     public var imageItemArr = [ImageItem]()
-    
-    private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,16 +61,9 @@ class PhotoEntryViewController: UIViewController {
             return
         }
         
-        let selectedItem = ImageItem(imageData: resizedImageData, date: Date(), description: textView.text)
+        let createdItem = ImageItem(imageData: resizedImageData, date: Date(), description: textView.text)
         
-        imageItemArr.insert(selectedItem, at: 0)
-        do {
-            try dataPersistence.create(item: selectedItem)
-        } catch {
-            print("could not save info")
-        }
-        
-        delegate?.newDataAdded(self, resizedImage!, textView.text)
+        delegate?.newDataAdded(self, createdItem)
         dismiss(animated: true)
     }
     

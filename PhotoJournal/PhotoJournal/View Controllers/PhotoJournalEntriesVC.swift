@@ -44,6 +44,24 @@ class PhotoJournalEntriesVC: UIViewController {
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? CollectionViewCell else {
+            fatalError("cannot downcast to CollectionViewCell")
+        }
+        let selectedImage = imageData[indexPath.row]
+        
+        
+        return cell
+    }
+    
+    
+}
+
+extension PhotoJournalEntriesVC: UICollectionViewDelegateFlowLayout {
     
 }
 

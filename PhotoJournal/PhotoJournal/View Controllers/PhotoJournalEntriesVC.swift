@@ -14,7 +14,11 @@ class PhotoJournalEntriesVC: UIViewController{
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
-    public var imageData = [ImageItem]()
+    public var imageData = [ImageItem]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +63,9 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
 
 extension PhotoJournalEntriesVC: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      let interItemSpacing: CGFloat = 4
+      let interItemSpacing: CGFloat = 2
       let maxWidth = UIScreen.main.bounds.size.width
-      let numberOfItems: CGFloat = 2
+      let numberOfItems: CGFloat = 1
       let totalSpacing: CGFloat = numberOfItems * interItemSpacing
       let itemWidth: CGFloat = (maxWidth - totalSpacing) / numberOfItems
       

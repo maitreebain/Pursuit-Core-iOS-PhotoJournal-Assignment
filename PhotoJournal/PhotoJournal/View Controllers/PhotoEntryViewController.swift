@@ -38,6 +38,7 @@ class PhotoEntryViewController: UIViewController {
         
         imagePickerController.delegate = self
         textView.delegate = self
+        saveButton.isEnabled = false
     }
     
     private func noCamera() {
@@ -65,7 +66,6 @@ class PhotoEntryViewController: UIViewController {
         let selectedItem = ImageItem(imageData: resizedImageData, date: Date(), description: textView.text)
         
         imageItemArr.insert(selectedItem, at: 0)
-        
         do {
             try dataPersistence.create(item: selectedItem)
         } catch {
@@ -80,12 +80,13 @@ class PhotoEntryViewController: UIViewController {
     @IBAction func photoLibraryButtonPressed(_ sender: UIBarButtonItem) {
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true)
-        
+        saveButton.isEnabled = true
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIBarButtonItem) {
         imagePickerController.sourceType = .camera
         present(imagePickerController, animated: true)
+        saveButton.isEnabled = true
     }
     
 }

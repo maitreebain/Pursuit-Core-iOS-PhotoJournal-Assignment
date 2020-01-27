@@ -22,12 +22,15 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     
-    public func configureCell(_ image: ImageItem) {
+    public func configureCell(_ imageInfo: ImageItem) {
         
-        guard let image = UIImage(data: image.imageData) else {
+        guard let image = UIImage(data: imageInfo.imageData) else {
             return
         }
         photoItem.image = image
+        
+        imageLabel.text = imageInfo.description
+        dateLabel.text = imageInfo.date.description
         
     }
     

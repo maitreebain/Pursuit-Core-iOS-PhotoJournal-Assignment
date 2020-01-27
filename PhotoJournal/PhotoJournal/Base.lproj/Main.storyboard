@@ -42,7 +42,7 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Wg7-fr-Siv" customClass="CollectionViewCell" customModule="PhotoJournal" customModuleProvider="target">
                                         <rect key="frame" x="59" y="0.0" width="296" height="272"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BEc-EL-7m4">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.90000000000000002" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BEc-EL-7m4">
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="272"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -68,13 +68,14 @@
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.rotate" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lPI-Yq-EGG">
                                                     <rect key="frame" x="8" y="8.5" width="280" height="161"/>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="jWP-kS-FX3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="faE-ho-xwF" secondAttribute="trailing" constant="8" symbolic="YES" id="3cW-hV-7of"/>
                                                 <constraint firstItem="lPI-Yq-EGG" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="3n3-wL-cGT"/>
                                                 <constraint firstItem="72N-ea-E58" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="5TU-me-928"/>
+                                                <constraint firstItem="jWP-kS-FX3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="faE-ho-xwF" secondAttribute="trailing" constant="8" symbolic="YES" id="7TQ-7U-nib"/>
                                                 <constraint firstItem="faE-ho-xwF" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="FW5-0O-Qok"/>
                                                 <constraint firstItem="jWP-kS-FX3" firstAttribute="top" secondItem="lPI-Yq-EGG" secondAttribute="bottom" constant="20" id="a8W-3o-Jy5"/>
                                                 <constraint firstAttribute="trailing" secondItem="jWP-kS-FX3" secondAttribute="trailing" constant="20" id="cSc-bt-qD5"/>
@@ -84,7 +85,7 @@
                                                 <constraint firstItem="lPI-Yq-EGG" firstAttribute="height" secondItem="BEc-EL-7m4" secondAttribute="height" multiplier="0.6" id="qP2-po-v5m"/>
                                                 <constraint firstAttribute="trailing" secondItem="lPI-Yq-EGG" secondAttribute="trailing" constant="8" id="sxS-kG-mPF"/>
                                                 <constraint firstItem="lPI-Yq-EGG" firstAttribute="top" secondItem="BEc-EL-7m4" secondAttribute="top" constant="8" id="tMV-Xs-oHN"/>
-                                                <constraint firstItem="faE-ho-xwF" firstAttribute="width" secondItem="BEc-EL-7m4" secondAttribute="width" multiplier="0.7" id="wMR-pT-sBR"/>
+                                                <constraint firstItem="faE-ho-xwF" firstAttribute="width" secondItem="BEc-EL-7m4" secondAttribute="width" multiplier="0.7" id="wPz-fM-qoS"/>
                                                 <constraint firstAttribute="trailing" secondItem="jWP-kS-FX3" secondAttribute="trailing" constant="20" id="zhJ-KY-0Gq"/>
                                             </constraints>
                                         </collectionViewCellContentView>

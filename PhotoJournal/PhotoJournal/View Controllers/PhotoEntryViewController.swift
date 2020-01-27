@@ -29,6 +29,8 @@ class PhotoEntryViewController: UIViewController {
     
     public var imageData: ImageItem?
     
+    public var imageItemArr = [ImageItem]()
+    
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
     override func viewDidLoad() {
@@ -50,10 +52,7 @@ class PhotoEntryViewController: UIViewController {
     
     
     @IBAction func saveActionButtonPressed(_ sender: UIBarButtonItem) {
-        
-        guard let imageData = imageView.image?.jpegData(compressionQuality: 1.0) else {
-            return
-        }
+
         let size = UIScreen.main.bounds.size
         let rect = AVMakeRect(aspectRatio: imageView.image!.size, insideRect:CGRect(origin: CGPoint.zero, size: size))
         let resizedImage = imageView.image?.resizeImage(to: rect.size.width, height: rect.size.height)
@@ -62,23 +61,15 @@ class PhotoEntryViewController: UIViewController {
             return
         }
         
-        let selectedItem = ImageItem(imageData: imageData, date: Date(), description: textView.text)
+        let selectedItem = ImageItem(imageData: resizedImageData, date: Date(), description: textView.text)
         
-        /*
-             
-             let imageInfo = ImageItem(imageData: resizedImageData, date: Date())
-             
-             imageData.insert(imageInfo, at: 0)
-             let indexPath = IndexPath(row: 0, section: 0)
-             collectionView.insertItems(at: [indexPath])
-             
-             do{
-                 try dataPersistence.create(item: imageInfo)
-             } catch {
-                 print("could not save image")
-             }
-         }
-         */
+        imageItemArr.insert(selectedItem, at: 0)
+        
+        do {
+            try dataPersistence.create(item: selectedItem)
+        } catch {
+            print("could not save info")
+        }
         
         delegate?.newDataAdded(self, resizedImage!, textView.text)
     }

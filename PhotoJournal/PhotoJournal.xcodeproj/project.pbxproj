@@ -16,6 +16,7 @@
 		801E578623DE7A1B000C16BA /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E578523DE7A1B000C16BA /* CollectionViewCell.swift */; };
 		801E578823DE7A3A000C16BA /* PhotoEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E578723DE7A3A000C16BA /* PhotoEntryViewController.swift */; };
 		801E578C23DE7ACE000C16BA /* DataPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = 801E578B23DE7ACE000C16BA /* DataPersistence */; };
+		801E578F23DE7C9E000C16BA /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801E578E23DE7C9E000C16BA /* FileManager+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		801E577F23DE74B2000C16BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		801E578523DE7A1B000C16BA /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		801E578723DE7A3A000C16BA /* PhotoEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEntryViewController.swift; sourceTree = "<group>"; };
+		801E578E23DE7C9E000C16BA /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		801E577023DE74B1000C16BA /* PhotoJournal */ = {
 			isa = PBXGroup;
 			children = (
+				801E578D23DE7C7F000C16BA /* Persistence Helpers */,
 				801E577123DE74B1000C16BA /* AppDelegate.swift */,
 				801E577323DE74B1000C16BA /* SceneDelegate.swift */,
 				801E578523DE7A1B000C16BA /* CollectionViewCell.swift */,
@@ -81,6 +84,14 @@
 				801E578723DE7A3A000C16BA /* PhotoEntryViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		801E578D23DE7C7F000C16BA /* Persistence Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				801E578E23DE7C9E000C16BA /* FileManager+Extensions.swift */,
+			);
+			path = "Persistence Helpers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 				801E578623DE7A1B000C16BA /* CollectionViewCell.swift in Sources */,
 				801E577423DE74B1000C16BA /* SceneDelegate.swift in Sources */,
 				801E578823DE7A3A000C16BA /* PhotoEntryViewController.swift in Sources */,
+				801E578F23DE7C9E000C16BA /* FileManager+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

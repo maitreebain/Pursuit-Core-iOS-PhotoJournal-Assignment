@@ -16,9 +16,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6T-6G-6qN">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YJS-dw-txr"/>
+                                    <barButtonItem image="plus.rectangle.fill" catalog="system" id="PWE-RH-4LH">
+                                        <connections>
+                                            <segue destination="wY7-OD-ogA" kind="presentation" id="FQK-Dn-msA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="aSb-hP-XXg"/>
+                                </items>
+                                <color key="barTintColor" red="0.39436031770000002" green="0.80454147949999999" blue="0.84708121830000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sNQ-WH-npb">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bkL-K3-BGL">
                                     <size key="itemSize" width="296" height="272"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -26,7 +39,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Wg7-fr-Siv">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Wg7-fr-Siv" customClass="CollectionViewCell" customModule="PhotoJournal" customModuleProvider="target">
                                         <rect key="frame" x="59" y="0.0" width="296" height="272"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BEc-EL-7m4">
@@ -37,15 +50,15 @@
                                                     <rect key="frame" x="8" y="8" width="280" height="163"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faE-ho-xwF">
-                                                    <rect key="frame" x="8" y="191" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="8" y="191" width="51.5" height="26.5"/>
+                                                    <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72N-ea-E58">
-                                                    <rect key="frame" x="8" y="243" width="268" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="8" y="245" width="268" height="19"/>
+                                                    <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWP-kS-FX3">
@@ -70,26 +83,116 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="296" height="272"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="72N-ea-E58" id="s6g-8I-Wzf"/>
+                                            <outlet property="imageLabel" destination="faE-ho-xwF" id="If8-9h-kLs"/>
+                                            <outlet property="photoItem" destination="lPI-Yq-EGG" id="7Bn-1f-aUf"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sNQ-WH-npb" secondAttribute="bottom" id="83p-rA-ZAq"/>
+                            <constraint firstItem="a6T-6G-6qN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="1wo-Nt-dWn"/>
+                            <constraint firstItem="a6T-6G-6qN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FQ5-m4-vNx"/>
+                            <constraint firstItem="a6T-6G-6qN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OHa-oV-6Sk"/>
+                            <constraint firstItem="a6T-6G-6qN" firstAttribute="top" secondItem="sNQ-WH-npb" secondAttribute="bottom" symbolic="YES" id="PwP-fG-S82"/>
                             <constraint firstItem="sNQ-WH-npb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Wug-h2-bfQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sNQ-WH-npb" secondAttribute="trailing" id="u4U-U8-HuU"/>
                             <constraint firstItem="sNQ-WH-npb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="v6Q-KF-C3N"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="sNQ-WH-npb" id="Z14-12-oHW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="117.85714285714285"/>
         </scene>
+        <!--Photo Entry View Controller-->
+        <scene sceneID="quy-0S-pJj">
+            <objects>
+                <viewController id="wY7-OD-ogA" customClass="PhotoEntryViewController" customModule="PhotoJournal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Cn-HE-fJ8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tYM-cJ-8ru">
+                                <rect key="frame" x="20" y="105" width="374" height="210.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWx-R4-OJR">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Cancel" id="fzI-MY-8jH"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="De0-re-TeJ"/>
+                                    <barButtonItem title="Save" id="NQF-G7-dP5"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dds-RX-ch6">
+                                <rect key="frame" x="0.0" y="758" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem image="camera.on.rectangle.fill" catalog="system" id="u5x-Xf-1ZM"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="O3m-fC-omf"/>
+                                    <barButtonItem image="camera.circle.fill" catalog="system" id="Lbr-mh-LY8"/>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter description below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tm-wW-oJY">
+                                <rect key="frame" x="20" y="64" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7dX-A4-ozI">
+                                <rect key="frame" x="20" y="410.5" width="374" height="252.5"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tYM-cJ-8ru" firstAttribute="leading" secondItem="WKt-XF-1GV" secondAttribute="leading" constant="20" id="20Q-4f-JC4"/>
+                            <constraint firstItem="LWx-R4-OJR" firstAttribute="top" secondItem="WKt-XF-1GV" secondAttribute="top" id="23o-P8-1Z7"/>
+                            <constraint firstItem="2Tm-wW-oJY" firstAttribute="leading" secondItem="WKt-XF-1GV" secondAttribute="leading" constant="20" id="7L0-GB-9ZR"/>
+                            <constraint firstItem="7dX-A4-ozI" firstAttribute="top" secondItem="tYM-cJ-8ru" secondAttribute="bottom" constant="95" id="Axh-Vm-icC"/>
+                            <constraint firstItem="7dX-A4-ozI" firstAttribute="leading" secondItem="WKt-XF-1GV" secondAttribute="leading" constant="20" id="B7d-fb-4An"/>
+                            <constraint firstItem="WKt-XF-1GV" firstAttribute="trailing" secondItem="tYM-cJ-8ru" secondAttribute="trailing" constant="20" id="CI4-5N-385"/>
+                            <constraint firstItem="WKt-XF-1GV" firstAttribute="trailing" secondItem="2Tm-wW-oJY" secondAttribute="trailing" constant="20" id="Kdd-Y2-s1W"/>
+                            <constraint firstItem="Dds-RX-ch6" firstAttribute="leading" secondItem="WKt-XF-1GV" secondAttribute="leading" id="LBd-Zi-1gE"/>
+                            <constraint firstItem="7dX-A4-ozI" firstAttribute="height" secondItem="5Cn-HE-fJ8" secondAttribute="height" multiplier="0.3" id="N03-Gz-HlG"/>
+                            <constraint firstItem="WKt-XF-1GV" firstAttribute="trailing" secondItem="7dX-A4-ozI" secondAttribute="trailing" constant="20" id="SIH-hg-dlS"/>
+                            <constraint firstItem="Dds-RX-ch6" firstAttribute="trailing" secondItem="WKt-XF-1GV" secondAttribute="trailing" id="bm6-JW-zyr"/>
+                            <constraint firstItem="LWx-R4-OJR" firstAttribute="trailing" secondItem="WKt-XF-1GV" secondAttribute="trailing" id="gqq-QA-IVf"/>
+                            <constraint firstItem="WKt-XF-1GV" firstAttribute="bottom" secondItem="Dds-RX-ch6" secondAttribute="bottom" constant="6" id="i4r-UI-hkt"/>
+                            <constraint firstItem="tYM-cJ-8ru" firstAttribute="height" secondItem="5Cn-HE-fJ8" secondAttribute="height" multiplier="0.25" id="m3i-lU-axB"/>
+                            <constraint firstItem="tYM-cJ-8ru" firstAttribute="top" secondItem="2Tm-wW-oJY" secondAttribute="bottom" constant="20" id="ppQ-Gm-OIY"/>
+                            <constraint firstItem="LWx-R4-OJR" firstAttribute="leading" secondItem="WKt-XF-1GV" secondAttribute="leading" id="vhp-e5-7yK"/>
+                            <constraint firstItem="2Tm-wW-oJY" firstAttribute="top" secondItem="LWx-R4-OJR" secondAttribute="bottom" constant="20" id="xjP-hS-Y2U"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WKt-XF-1GV"/>
+                    </view>
+                    <connections>
+                        <outlet property="camButton" destination="Lbr-mh-LY8" id="b9j-BQ-pW9"/>
+                        <outlet property="imageLibraryButton" destination="u5x-Xf-1ZM" id="MAL-BE-w1F"/>
+                        <outlet property="imageView" destination="7dX-A4-ozI" id="5Of-UU-axI"/>
+                        <outlet property="saveButton" destination="NQF-G7-dP5" id="bwM-c1-gc5"/>
+                        <outlet property="textView" destination="tYM-cJ-8ru" id="PYZ-KN-9Rr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u74-aY-pe5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="885.50724637681162" y="117.85714285714285"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="camera.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="camera.on.rectangle.fill" catalog="system" width="64" height="48"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
+        <image name="plus.rectangle.fill" catalog="system" width="64" height="46"/>
     </resources>
 </document>

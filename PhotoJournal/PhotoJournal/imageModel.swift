@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct ImageData: Codable {
+struct ImageItem: Codable {
     let imageData: Data
     let date: Date
     let identifier = UUID().uuidString
+    let description: String?
 }

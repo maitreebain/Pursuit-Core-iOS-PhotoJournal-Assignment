@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PhotoEntryViewController: UIViewController {
 
@@ -20,7 +21,7 @@ class PhotoEntryViewController: UIViewController {
     
     private let imagePickerController = UIImagePickerController()
     
-    public var imageData: ImageData?
+    public var imageData: ImageItem?
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
@@ -44,9 +45,34 @@ class PhotoEntryViewController: UIViewController {
     
     @IBAction func saveActionButtonPressed(_ sender: UIBarButtonItem) {
         
-        guard let image = imageData else {
+        guard let imageData = imageView.image?.jpegData(compressionQuality: 1.0) else {
             return
         }
+        let size = UIScreen.main.bounds.size
+        let rect = AVMakeRect(aspectRatio: imageView.image!.size, insideRect:CGRect(origin: CGPoint.zero, size: size))
+        let resizedImage = imageView.image?.resizeImage(to: rect.size.width, height: rect.size.height)
+        
+        guard let resizedImageData = resizedImage?.jpegData(compressionQuality: 1.0) else {
+            return
+        }
+        
+        let selectedItem = ImageItem(imageData: imageData, date: Date(), description: textView.text)
+        
+        /*
+             
+             let imageInfo = ImageItem(imageData: resizedImageData, date: Date())
+             
+             imageData.insert(imageInfo, at: 0)
+             let indexPath = IndexPath(row: 0, section: 0)
+             collectionView.insertItems(at: [indexPath])
+             
+             do{
+                 try dataPersistence.create(item: imageInfo)
+             } catch {
+                 print("could not save image")
+             }
+         }
+         */
         
         
     }

@@ -22,7 +22,7 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     
-    public func configureCell(_ image: ImageData) {
+    public func configureCell(_ image: ImageItem) {
         
         guard let image = UIImage(data: image.imageData) else {
             return

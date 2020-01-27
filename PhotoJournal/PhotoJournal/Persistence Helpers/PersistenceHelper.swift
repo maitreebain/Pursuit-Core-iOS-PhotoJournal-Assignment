@@ -18,7 +18,7 @@ enum DataPersistenceError: Error {
 
 class PersistenceHelper {
     
-  private var images = [ImageData]()
+  private var images = [ImageItem]()
   
   private var filename: String
   
@@ -39,7 +39,7 @@ class PersistenceHelper {
   }
 
     
-  public func create(item: ImageData) throws {
+  public func create(item: ImageItem) throws {
     images.append(item)
     
     do {
@@ -49,14 +49,14 @@ class PersistenceHelper {
     }
   }
     
-  public func loadImage() throws -> [ImageData] {
+  public func loadImage() throws -> [ImageItem] {
     
     let url = FileManager.pathToDocumentsDirectory(with: filename)
 
     if FileManager.default.fileExists(atPath: url.path) {
       if let data = FileManager.default.contents(atPath: url.path) {
         do {
-          images = try PropertyListDecoder().decode([ImageData].self, from: data)
+          images = try PropertyListDecoder().decode([ImageItem].self, from: data)
         } catch {
           throw DataPersistenceError.decodingError(error)
         }

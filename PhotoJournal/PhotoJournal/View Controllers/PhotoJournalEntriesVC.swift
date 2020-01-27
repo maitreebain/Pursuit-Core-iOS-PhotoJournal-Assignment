@@ -16,8 +16,6 @@ class PhotoJournalEntriesVC: UIViewController{
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
-    private let imagePickerController = UIImagePickerController()
-    
     public var imageData = [ImageData]()
     
     private var selectedImage: UIImage? {
@@ -31,7 +29,6 @@ class PhotoJournalEntriesVC: UIViewController{
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        imagePickerController.delegate = self
         
         loadData()
     }
@@ -148,21 +145,6 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
     }
     
-}
-
-extension PhotoJournalEntriesVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-            print("image selection not found")
-            return
-        }
-        selectedImage = image
-        dismiss(animated: true)
-    }
 }
 
 extension UIImage {

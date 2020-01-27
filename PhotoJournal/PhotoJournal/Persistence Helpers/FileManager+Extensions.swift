@@ -15,6 +15,4 @@ extension FileManager{
     static func pathToDocumentsDirectory(with filename: String) -> URL {
         return getDocumentsDirectory().appendingPathComponent(filename)
     }
-    
-    
 }

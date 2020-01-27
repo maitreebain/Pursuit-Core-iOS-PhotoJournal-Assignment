@@ -8,19 +8,19 @@
 
 import UIKit
 
+protocol CollectionViewCellDelegate: AnyObject {
+    func showAlert(_ imageCell: CollectionViewCell)
+}
+
 class CollectionViewCell: UICollectionViewCell {
+    
+    weak var delegate: CollectionViewCellDelegate?
     
     @IBOutlet weak var photoItem: UIImageView!
     @IBOutlet weak var imageLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.cornerRadius = 20.0
-        backgroundColor = .orange
-        
-    }
     
     public func configureCell(_ image: ImageData) {
         
@@ -28,6 +28,12 @@ class CollectionViewCell: UICollectionViewCell {
             return
         }
         photoItem.image = image
+    }
+    
+    
+    @IBAction func editButtonPressed(_ sender: UIButton) {
+
+        delegate?.showAlert(self)
     }
     
 }

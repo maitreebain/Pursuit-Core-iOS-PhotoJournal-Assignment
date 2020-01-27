@@ -65,6 +65,9 @@
                                                     <rect key="frame" x="247" y="191" width="29" height="22"/>
                                                     <color key="tintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="pencil.and.ellipsis.rectangle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="editButtonPressed:" destination="Wg7-fr-Siv" eventType="touchUpInside" id="2p9-Xs-m6u"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

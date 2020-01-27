@@ -9,19 +9,14 @@
 import UIKit
 import AVFoundation
 
-class PhotoJournalEntriesVC: UIViewController {
+
+class PhotoJournalEntriesVC: UIViewController{
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
     public var imageData = [ImageData]()
-    
-    private var selectedImage: UIImage? {
-        didSet{
-            appendToImages()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +39,7 @@ class PhotoJournalEntriesVC: UIViewController {
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageData.count
     }
@@ -55,7 +51,7 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
         let selectedImage = imageData[indexPath.row]
         
         cell.configureCell(selectedImage)
-        //        cell.delegate = self
+        cell.delegate = self
         
         return cell
     }
@@ -64,9 +60,51 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDelegateFlowLayout {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSpacing: CGFloat = 1
+        let maxWidth = UIScreen.main.bounds.size.width
+        let numberOfItems: CGFloat = 1
+        let totalSpace: CGFloat = numberOfItems * itemSpacing
+        let itemWidth: CGFloat = (maxWidth - totalSpace) / numberOfItems
+        
+        return CGSize(width: itemWidth, height: itemWidth)
+    }
 }
 
+extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
+    
+    func showAlert(_ imageCell: CollectionViewCell){
+        
+        guard let indexPath = collectionView.indexPath(for: imageCell) else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
+            self?.deleteImage(indexPath: indexPath)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+        
+    }
+    
+    private func deleteImage(indexPath: IndexPath) {
+        do {
+            try dataPersistence.delete(event: indexPath.row)
+            
+            imageData.remove(at: indexPath.row)
+            
+            collectionView.deleteItems(at: [indexPath])
+            print("deleted item")
+        } catch {
+            print("deletion error: \(error)")
+        }
+    }
+    
+}
 
 extension UIImage {
     func resizeImage(to width: CGFloat, height: CGFloat) -> UIImage {

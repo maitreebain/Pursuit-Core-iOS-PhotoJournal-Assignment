@@ -32,7 +32,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sNQ-WH-npb">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bkL-K3-BGL">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bkL-K3-BGL">
                                     <size key="itemSize" width="296" height="272"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -46,12 +46,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="272"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.rotate" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lPI-Yq-EGG">
-                                                    <rect key="frame" x="8" y="8.5" width="280" height="161"/>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faE-ho-xwF">
-                                                    <rect key="frame" x="8" y="191" width="51.5" height="26.5"/>
+                                                    <rect key="frame" x="8" y="191" width="207" height="27"/>
                                                     <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -70,20 +66,26 @@
                                                         <action selector="editButtonPressed:" destination="Wg7-fr-Siv" eventType="touchUpInside" id="2p9-Xs-m6u"/>
                                                     </connections>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.rotate" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lPI-Yq-EGG">
+                                                    <rect key="frame" x="8" y="8.5" width="280" height="161"/>
+                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="faE-ho-xwF" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="35N-rq-6Dx"/>
-                                                <constraint firstAttribute="trailing" secondItem="lPI-Yq-EGG" secondAttribute="trailing" constant="8" id="5hc-gn-Qvv"/>
-                                                <constraint firstItem="faE-ho-xwF" firstAttribute="top" secondItem="lPI-Yq-EGG" secondAttribute="bottom" constant="20" id="BtO-CQ-KYM"/>
-                                                <constraint firstAttribute="trailing" secondItem="72N-ea-E58" secondAttribute="trailing" constant="20" id="Qhl-n2-4jT"/>
-                                                <constraint firstItem="jWP-kS-FX3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="faE-ho-xwF" secondAttribute="trailing" constant="8" symbolic="YES" id="XvS-qs-605"/>
+                                                <constraint firstItem="jWP-kS-FX3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="faE-ho-xwF" secondAttribute="trailing" constant="8" symbolic="YES" id="3cW-hV-7of"/>
+                                                <constraint firstItem="lPI-Yq-EGG" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="3n3-wL-cGT"/>
+                                                <constraint firstItem="72N-ea-E58" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="5TU-me-928"/>
+                                                <constraint firstItem="faE-ho-xwF" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="FW5-0O-Qok"/>
+                                                <constraint firstItem="jWP-kS-FX3" firstAttribute="top" secondItem="lPI-Yq-EGG" secondAttribute="bottom" constant="20" id="a8W-3o-Jy5"/>
                                                 <constraint firstAttribute="trailing" secondItem="jWP-kS-FX3" secondAttribute="trailing" constant="20" id="cSc-bt-qD5"/>
-                                                <constraint firstAttribute="bottom" secondItem="72N-ea-E58" secondAttribute="bottom" constant="8" id="fR7-23-t93"/>
-                                                <constraint firstItem="lPI-Yq-EGG" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="pip-Wj-iAX"/>
-                                                <constraint firstItem="72N-ea-E58" firstAttribute="leading" secondItem="BEc-EL-7m4" secondAttribute="leading" constant="8" id="rgP-ny-snH"/>
-                                                <constraint firstItem="lPI-Yq-EGG" firstAttribute="top" secondItem="BEc-EL-7m4" secondAttribute="top" constant="8" id="vWb-Z7-TMc"/>
-                                                <constraint firstItem="lPI-Yq-EGG" firstAttribute="height" secondItem="BEc-EL-7m4" secondAttribute="height" multiplier="0.6" id="xfB-pI-T4p"/>
-                                                <constraint firstItem="jWP-kS-FX3" firstAttribute="top" secondItem="lPI-Yq-EGG" secondAttribute="bottom" constant="20" id="zh0-Dv-IAZ"/>
+                                                <constraint firstItem="faE-ho-xwF" firstAttribute="top" secondItem="lPI-Yq-EGG" secondAttribute="bottom" constant="20" id="d2W-gN-h1w"/>
+                                                <constraint firstAttribute="bottom" secondItem="72N-ea-E58" secondAttribute="bottom" constant="8" id="d8a-KT-uzT"/>
+                                                <constraint firstAttribute="trailing" secondItem="72N-ea-E58" secondAttribute="trailing" constant="20" id="lNi-wP-TCx"/>
+                                                <constraint firstItem="lPI-Yq-EGG" firstAttribute="height" secondItem="BEc-EL-7m4" secondAttribute="height" multiplier="0.6" id="qP2-po-v5m"/>
+                                                <constraint firstAttribute="trailing" secondItem="lPI-Yq-EGG" secondAttribute="trailing" constant="8" id="sxS-kG-mPF"/>
+                                                <constraint firstItem="lPI-Yq-EGG" firstAttribute="top" secondItem="BEc-EL-7m4" secondAttribute="top" constant="8" id="tMV-Xs-oHN"/>
+                                                <constraint firstItem="faE-ho-xwF" firstAttribute="width" secondItem="BEc-EL-7m4" secondAttribute="width" multiplier="0.7" id="wMR-pT-sBR"/>
+                                                <constraint firstAttribute="trailing" secondItem="jWP-kS-FX3" secondAttribute="trailing" constant="20" id="zhJ-KY-0Gq"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="296" height="272"/>
@@ -147,7 +149,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dds-RX-ch6">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dds-RX-ch6">
                                 <rect key="frame" x="0.0" y="758" width="414" height="44"/>
                                 <items>
                                     <barButtonItem image="camera.on.rectangle.fill" catalog="system" id="u5x-Xf-1ZM">
@@ -162,6 +164,7 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="0.39436031770000002" green="0.80454147949999999" blue="0.84708121830000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter description below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tm-wW-oJY">
                                 <rect key="frame" x="20" y="64" width="374" height="21"/>

@@ -32,7 +32,7 @@ class PhotoJournalEntriesVC: UIViewController{
             print("image data cannot be loaded")
         }
     }
-  
+    
     
 }
 
@@ -58,15 +58,16 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemSpacing: CGFloat = 10
-        let maxWidth = UIScreen.main.bounds.size.width
-        let numberOfItems: CGFloat = 1
-        let totalSpace: CGFloat = numberOfItems * itemSpacing
-        let itemWidth: CGFloat = (maxWidth - totalSpace) / numberOfItems
-        
-        return CGSize(width: itemWidth, height: itemWidth)
-    }
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      let interItemSpacing: CGFloat = 4
+      let maxWidth = UIScreen.main.bounds.size.width
+      let numberOfItems: CGFloat = 2
+      let totalSpacing: CGFloat = numberOfItems * interItemSpacing
+      let itemWidth: CGFloat = (maxWidth - totalSpacing) / numberOfItems
+      
+      return CGSize(width: itemWidth, height: itemWidth)
+  }
+
 }
 
 extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
@@ -78,9 +79,9 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self ] (alertAction) in
-//
-//        }
+        //        let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self ] (alertAction) in
+        //
+        //        }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
             self?.deleteImage(indexPath: indexPath)
         }

@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+protocol imageAppended: AnyObject {
+    func newDataAdded(_ viewController: PhotoEntryViewController, _ image: UIImage, _ description: String)
+}
+
 class PhotoEntryViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
@@ -18,6 +22,8 @@ class PhotoEntryViewController: UIViewController {
     
     @IBOutlet weak var imageLibraryButton: UIBarButtonItem!
     @IBOutlet weak var camButton: UIBarButtonItem!
+    
+    weak var delegate: imageAppended?
     
     private let imagePickerController = UIImagePickerController()
     
@@ -74,7 +80,7 @@ class PhotoEntryViewController: UIViewController {
          }
          */
         
-        
+        delegate?.newDataAdded(self, resizedImage!, textView.text)
     }
     
     

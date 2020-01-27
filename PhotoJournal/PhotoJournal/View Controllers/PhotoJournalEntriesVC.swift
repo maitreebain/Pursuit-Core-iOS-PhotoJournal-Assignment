@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PhotoJournalEntriesVC: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var dataPersistence = PersistenceHelper(filename: "images.plist")
     
-    private var imageData = [ImageData]() {
-        didSet {
-            
+    public var imageData = [ImageData]()
+    
+    private var selectedImage: UIImage? {
+        didSet{
+            appendToImages()
         }
     }
     
@@ -28,7 +31,7 @@ class PhotoJournalEntriesVC: UIViewController {
         
         loadData()
     }
-
+    
     private func loadData() {
         do {
             imageData = try dataPersistence.loadImage()
@@ -37,10 +40,7 @@ class PhotoJournalEntriesVC: UIViewController {
         }
     }
     
-    private func appendToImages() {
-        
-    }
-
+    
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDataSource {
@@ -54,6 +54,8 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
         }
         let selectedImage = imageData[indexPath.row]
         
+        cell.configureCell(selectedImage)
+        //        cell.delegate = self
         
         return cell
     }

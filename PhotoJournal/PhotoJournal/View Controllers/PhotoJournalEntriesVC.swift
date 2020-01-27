@@ -105,12 +105,13 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
     
     private func deleteImage(indexPath: IndexPath) {
         do {
+            
             try dataPersistence.delete(event: indexPath.row)
             
             imageData.remove(at: indexPath.row)
             
-            collectionView.deleteItems(at: [indexPath])
             print("deleted item")
+            
         } catch {
             print("deletion error: \(error)")
         }

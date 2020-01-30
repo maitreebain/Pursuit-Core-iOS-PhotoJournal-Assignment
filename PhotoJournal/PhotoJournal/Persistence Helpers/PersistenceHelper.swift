@@ -49,8 +49,24 @@ class PersistenceHelper {
         }
     }
     
+    @discardableResult
     public func update(_ oldItem: ImageItem, _ newItem: ImageItem) -> Bool {
-        if let index = images.
+        if let index = images.firstIndex(of: oldItem){
+            let result = update(newItem, index)
+            return result
+        }
+        return false
+    }
+    
+    @discardableResult
+    public func update(_ item: ImageItem, _ index: Int) -> Bool{
+        images[index] = item
+        do {
+            try save()
+            return true
+        } catch {
+            return false
+        }
     }
     
     public func loadImage() throws -> [ImageItem] {

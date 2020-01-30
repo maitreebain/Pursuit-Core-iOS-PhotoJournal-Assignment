@@ -50,16 +50,18 @@ class PhotoEntryViewController: UIViewController {
     
     private func updateUI() {
         
+        guard let imageInfo = imageData else {
+            return
+        }
+        
         if state == .saving{
-            guard let imageInfo = imageData else {
-                return
-            }
-            
             imageView.image = UIImage(data: imageInfo.imageData)
             
             textView.text = imageInfo.description
             saveAction()
         } else if state == .editing {
+            
+            imageView.image = UIImage(data: <#T##Data#>)
             
         }
         
@@ -91,6 +93,10 @@ class PhotoEntryViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    
+    public func update(_ oldItem: ImageItem, _ newItem: ImageItem) {
+        delegate?.updateData(oldItem, newItem)
+    }
     
     @IBAction func saveActionButtonPressed(_ sender: UIBarButtonItem) {
         updateUI()

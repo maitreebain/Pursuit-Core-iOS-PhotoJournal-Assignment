@@ -70,16 +70,16 @@ extension PhotoJournalEntriesVC: UICollectionViewDataSource {
 }
 
 extension PhotoJournalEntriesVC: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      let interItemSpacing: CGFloat = 2
-      let maxWidth = UIScreen.main.bounds.size.width
-      let numberOfItems: CGFloat = 1
-      let totalSpacing: CGFloat = numberOfItems * interItemSpacing
-      let itemWidth: CGFloat = (maxWidth - totalSpacing) / numberOfItems
-      
-      return CGSize(width: itemWidth, height: itemWidth)
-  }
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let interItemSpacing: CGFloat = 2
+        let maxWidth = UIScreen.main.bounds.size.width
+        let numberOfItems: CGFloat = 1
+        let totalSpacing: CGFloat = numberOfItems * interItemSpacing
+        let itemWidth: CGFloat = (maxWidth - totalSpacing) / numberOfItems
+        
+        return CGSize(width: itemWidth, height: itemWidth)
+    }
+    
 }
 
 extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
@@ -91,25 +91,37 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-                let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] (alertAction) in
-                    
-                    guard let photoEditVC = self?.storyboard?.instantiateViewController(identifier: "PhotoEntryViewController") as? PhotoEntryViewController else {
-                        fatalError("did not instantiate view controller")
-                    }
-                    let selectedCell = self?.imageData[indexPath.row]
-                    
-                    photoEditVC.imageData = selectedCell
-                    
-                    photoEditVC.state = .editing
-                    print("\(photoEditVC.state)")
-                    self?.present(photoEditVC, animated: true)
-                }
+        let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] (alertAction) in
+            
+            guard let photoEditVC = self?.storyboard?.instantiateViewController(identifier: "PhotoEntryViewController") as? PhotoEntryViewController,
+                let newItem = photoEditVC.imageData else {
+                    fatalError("did not instantiate view controller")
+            }
+            let selectedCell = self?.imageData[indexPath.row]
+            
+            photoEditVC.imageData = selectedCell
+            
+            if photoEditVC.state == .editing {
+                let index = self?.imageData.firstIndex { $0.identifier == newItem.identifier}
+                guard let itemIndex = index else { return }
+                
+                let oldItem = self?.imageData[itemIndex]
+                
+                updateData(oldItem, newItem)
+            }
+            
+            
+            
+            print("\(photoEditVC.state)")
+            
+            self?.present(photoEditVC, animated: true)
+        }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
             self?.deleteImage(indexPath: indexPath)
         }
-//        let sharedAction = UIAlertAction(title: "Shared", style: .default) { [weak self] (alertAction) in
-//
-//        }
+        //        let sharedAction = UIAlertAction(title: "Shared", style: .default) { [weak self] (alertAction) in
+        //
+        //        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
@@ -146,7 +158,10 @@ extension UIImage {
 
 extension PhotoJournalEntriesVC: imageAppended{
     func updateData(_ oldItem: ImageItem, _ newItem: ImageItem) {
-        <#code#>
+        dataPersistence.update(oldItem, newItem)
+        // find index of old item and replax old item with new item
+        imageData[] = newItem
+        loadData()
     }
     
     func newDataAdded(_ viewController: PhotoEntryViewController, _ createdItem: ImageItem) {

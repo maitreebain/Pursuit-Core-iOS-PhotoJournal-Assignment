@@ -9,12 +9,18 @@
 import UIKit
 import AVFoundation
 
+enum Edit {
+    case editing
+    case saving
+}
+
 protocol imageAppended: AnyObject {
     func newDataAdded(_ viewController: PhotoEntryViewController, _ createdItem: ImageItem)
+    func updateData(_ oldItem: ImageItem, _ newItem: ImageItem)
 }
 
 class PhotoEntryViewController: UIViewController {
-
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -31,6 +37,8 @@ class PhotoEntryViewController: UIViewController {
     
     public var imageItemArr = [ImageItem]()
     
+    public var state = Edit.editing
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,13 +50,18 @@ class PhotoEntryViewController: UIViewController {
     
     private func updateUI() {
         
-        guard let imageInfo = imageData else {
-            return
+        if state == .saving{
+            guard let imageInfo = imageData else {
+                return
+            }
+            
+            imageView.image = UIImage(data: imageInfo.imageData)
+            
+            textView.text = imageInfo.description
+            saveAction()
+        } else if state == .editing {
+            
         }
-        
-        imageView.image = UIImage(data: imageInfo.imageData)
-        
-        textView.text = imageInfo.description
         
     }
     
@@ -63,9 +76,7 @@ class PhotoEntryViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    
-    @IBAction func saveActionButtonPressed(_ sender: UIBarButtonItem) {
-
+    public func saveAction() {
         let size = UIScreen.main.bounds.size
         let rect = AVMakeRect(aspectRatio: imageView.image!.size, insideRect:CGRect(origin: CGPoint.zero, size: size))
         let resizedImage = imageView.image?.resizeImage(to: rect.size.width, height: rect.size.height)
@@ -78,6 +89,12 @@ class PhotoEntryViewController: UIViewController {
         
         delegate?.newDataAdded(self, createdItem)
         dismiss(animated: true)
+    }
+    
+    
+    @IBAction func saveActionButtonPressed(_ sender: UIBarButtonItem) {
+        updateUI()
+        saveAction()
     }
     
     
@@ -98,7 +115,7 @@ class PhotoEntryViewController: UIViewController {
 extension PhotoEntryViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Description"{
-        textView.text = ""
+            textView.text = ""
         }
     }
     

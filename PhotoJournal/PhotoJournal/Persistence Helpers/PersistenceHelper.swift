@@ -9,74 +9,78 @@
 import Foundation
 
 enum DataPersistenceError: Error {
-  case savingError(Error)
-  case fileDoesNotExist(String)
-  case noData
-  case decodingError(Error)
-  case deletingError(Error)
+    case savingError(Error)
+    case fileDoesNotExist(String)
+    case noData
+    case decodingError(Error)
+    case deletingError(Error)
 }
 
 class PersistenceHelper {
     
-  private var images = [ImageItem]()
-  
-  private var filename: String
-  
-  init(filename: String) {
-    self.filename = filename
-  }
-  
-  private func save() throws {
-     let url = FileManager.pathToDocumentsDirectory(with: filename)
+    private var images = [ImageItem]()
     
-    do {
-      let data = try PropertyListEncoder().encode(images)
-      try data.write(to: url, options: .atomic)
+    private var filename: String
+    
+    init(filename: String) {
+        self.filename = filename
+    }
+    
+    private func save() throws {
+        let url = FileManager.pathToDocumentsDirectory(with: filename)
         
-    } catch {
-      throw DataPersistenceError.savingError(error)
-    }
-  }
-
-    
-  public func create(item: ImageItem) throws {
-    images.append(item)
-    
-    do {
-      try save()
-    } catch {
-      throw DataPersistenceError.savingError(error)
-    }
-  }
-    
-  public func loadImage() throws -> [ImageItem] {
-    
-    let url = FileManager.pathToDocumentsDirectory(with: filename)
-
-    if FileManager.default.fileExists(atPath: url.path) {
-      if let data = FileManager.default.contents(atPath: url.path) {
         do {
-          images = try PropertyListDecoder().decode([ImageItem].self, from: data)
+            let data = try PropertyListEncoder().encode(images)
+            try data.write(to: url, options: .atomic)
+            
         } catch {
-          throw DataPersistenceError.decodingError(error)
+            throw DataPersistenceError.savingError(error)
         }
-      } else {
-        throw DataPersistenceError.noData
-      }
     }
-    else {
-      throw DataPersistenceError.fileDoesNotExist(filename)
-    }
-    return images
-  }
-  
-  public func delete(event index: Int) throws {
-    images.remove(at: index)
     
-    do {
-      try save()
-    } catch {
-      throw DataPersistenceError.deletingError(error)
+    
+    public func create(item: ImageItem) throws {
+        images.append(item)
+        
+        do {
+            try save()
+        } catch {
+            throw DataPersistenceError.savingError(error)
+        }
     }
-  }
+    
+    public func update(_ oldItem: ImageItem, _ newItem: ImageItem) -> Bool {
+        if let index = images.
+    }
+    
+    public func loadImage() throws -> [ImageItem] {
+        
+        let url = FileManager.pathToDocumentsDirectory(with: filename)
+        
+        if FileManager.default.fileExists(atPath: url.path) {
+            if let data = FileManager.default.contents(atPath: url.path) {
+                do {
+                    images = try PropertyListDecoder().decode([ImageItem].self, from: data)
+                } catch {
+                    throw DataPersistenceError.decodingError(error)
+                }
+            } else {
+                throw DataPersistenceError.noData
+            }
+        }
+        else {
+            throw DataPersistenceError.fileDoesNotExist(filename)
+        }
+        return images
+    }
+    
+    public func delete(event index: Int) throws {
+        images.remove(at: index)
+        
+        do {
+            try save()
+        } catch {
+            throw DataPersistenceError.deletingError(error)
+        }
+    }
 }

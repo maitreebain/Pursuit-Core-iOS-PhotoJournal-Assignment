@@ -99,13 +99,16 @@ extension PhotoJournalEntriesVC: CollectionViewCellDelegate {
                     let selectedCell = self?.imageData[indexPath.row]
                     
                     photoEditVC.imageData = selectedCell
+                    
+                    photoEditVC.state = .editing
+                    print("\(photoEditVC.state)")
                     self?.present(photoEditVC, animated: true)
                 }
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] alertAction in
             self?.deleteImage(indexPath: indexPath)
         }
 //        let sharedAction = UIAlertAction(title: "Shared", style: .default) { [weak self] (alertAction) in
-//            <#code#>
+//
 //        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(deleteAction)
@@ -142,6 +145,10 @@ extension UIImage {
 }
 
 extension PhotoJournalEntriesVC: imageAppended{
+    func updateData(_ oldItem: ImageItem, _ newItem: ImageItem) {
+        <#code#>
+    }
+    
     func newDataAdded(_ viewController: PhotoEntryViewController, _ createdItem: ImageItem) {
         imageData.append(createdItem)
         
@@ -150,8 +157,6 @@ extension PhotoJournalEntriesVC: imageAppended{
         } catch {
             print("could not save info")
         }
-        
-        
     }
     
     
